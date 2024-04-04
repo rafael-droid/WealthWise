@@ -1,14 +1,13 @@
 package com.rafaeldroid.WealthWise.controllers;
 
 import com.rafaeldroid.WealthWise.models.Transaction;
-import com.rafaeldroid.WealthWise.repositories.TransactionRepository;
 import com.rafaeldroid.WealthWise.services.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/wealthwise")
@@ -18,11 +17,13 @@ public class TransactionController {
     private TransactionService transactionService;
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public Iterable<Transaction> getAllTransactions(){
         return transactionService.getTransactions();
     }
     @GetMapping("/{idTransaction")
-    public Transaction getTransactionById(@PathVariable Long id){
+    @ResponseStatus(HttpStatus.OK)
+    public Optional<Transaction> getTransactionById(@PathVariable Long id){
         return transactionService.getTransactionById(id);
     }
 }
