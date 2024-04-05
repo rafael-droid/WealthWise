@@ -21,9 +21,17 @@ public class TransactionController {
     public Iterable<Transaction> getAllTransactions(){
         return transactionService.getTransactions();
     }
-    @GetMapping("/{idTransaction")
+    @GetMapping("/{idTransaction}")
     @ResponseStatus(HttpStatus.OK)
     public Optional<Transaction> getTransactionById(@PathVariable Long id){
         return transactionService.getTransactionById(id);
     }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Transaction addTransaction(@RequestBody Transaction transaction){
+        return transactionService.createTransaction(transaction);
+    }
+
+
 }

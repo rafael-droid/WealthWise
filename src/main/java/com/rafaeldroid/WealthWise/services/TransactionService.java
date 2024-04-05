@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
@@ -26,5 +27,17 @@ public class TransactionService {
             return transaction;
         else
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found transaction");
+    }
+
+    public Transaction createTransaction(Transaction transaction) {
+        validateNewTransaction(transaction);
+        transactionRepository.save(transaction);
+        return transaction;
+    }
+
+    private void validateNewTransaction(Transaction transaction) {
+        if(ObjectUtils.isEmpty(transaction.getName()) && ObjectUtils.isEmpty(transaction.getAmount()))
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+
     }
 }
