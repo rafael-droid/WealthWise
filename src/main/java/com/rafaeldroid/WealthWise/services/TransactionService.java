@@ -40,4 +40,14 @@ public class TransactionService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 
     }
+
+    public Transaction updateTransaction(Transaction transaction, Long id) {
+        validateExistingTransaction(id);
+        return transactionRepository.save(transaction);
+    }
+
+    private void validateExistingTransaction(Long id) {
+        Optional<Transaction> existingTransaction = transactionRepository.findTransactionById(id);
+
+    }
 }

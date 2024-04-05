@@ -33,5 +33,9 @@ public class TransactionController {
         return transactionService.createTransaction(transaction);
     }
 
-
+    @PatchMapping("/{idTransaction}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Transaction updateTransaction(@RequestBody Transaction transaction, @PathVariable Long id){
+        return transactionService.updateTransaction(transaction,id);
+    }
 }
