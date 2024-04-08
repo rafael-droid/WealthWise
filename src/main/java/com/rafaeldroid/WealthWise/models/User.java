@@ -1,5 +1,6 @@
 package com.rafaeldroid.WealthWise.models;
 
+import com.rafaeldroid.WealthWise.models.enums.KindUser;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
