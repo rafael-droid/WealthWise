@@ -48,6 +48,18 @@ public class TransactionService {
 
     private void validateExistingTransaction(Long id) {
         Optional<Transaction> existingTransaction = transactionRepository.findTransactionById(id);
+        if(!existingTransaction.isPresent())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found transaction");
 
+    }
+
+    public String deleteTransaction(Long id) {
+        validateExistingTransaction(id);
+        try {
+            transactionRepository.deleteById(id);
+            return "Transaction was deleted";
+        }catch (ResponseStatusException e){
+            return e.getMessage();
+        }
     }
 }
